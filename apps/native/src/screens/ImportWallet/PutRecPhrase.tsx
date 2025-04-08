@@ -8,13 +8,13 @@ const PutRecPhrase: React.FC<ScreenProps<'GetRecPhrase'>> = () => {
 
   const goToWelcome = () => {
     navigation.navigate('GeneratePhrase');
+
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Import wallet</Text>
       <Button title="Go to Generate" onPress={goToWelcome} />
-      {/* Додайте інший вміст екрану генерації фрази */}
     </View>
   );
 };
