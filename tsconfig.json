@@ -5,6 +5,9 @@
   "references": [
     {
       "path": "./apps/native"
+    },
+    {
+      "path": "./packages"
     }
   ]
 }

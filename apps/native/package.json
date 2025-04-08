@@ -4,5 +4,14 @@
   "private": true,
   "nx": {
     "name": "native"
+  },
+  "dependencies": {
+    "@expo-google-fonts/poppins": "^0.3.0",
+    "@react-navigation/native": "^7.1.5",
+    "@react-navigation/native-stack": "^7.3.9",
+    "expo-app-loading": "^2.1.1",
+    "expo-splash-screen": "~0.29.22",
+    "react-native-svg": "15.8.0",
+    "expo-clipboard": "~7.0.1"
   }
 }
