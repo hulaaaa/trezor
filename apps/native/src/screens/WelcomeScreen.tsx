@@ -1,19 +1,25 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  Poppins_300Light,
+  Poppins_500Medium,
+  useFonts,
+} from '@expo-google-fonts/poppins';
 import { useNavigation } from '@react-navigation/native';
-import { ScreenProps } from '../navigation/index';
-import ActiveBtn from '../components/Btn'
-import { useFonts, Poppins_500Medium, Poppins_300Light } from '@expo-google-fonts/poppins';
 import * as SplashScreen from 'expo-splash-screen';
-import TrezorIcon from '../../assets/icons/trezor-icon'
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import TrezorIcon from '../assets/icons/trezor-icon';
+import ActiveBtn from '../components/Btn';
+import { RootStackParamList, ScreenProps } from '../navigation/index';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 SplashScreen.preventAutoHideAsync();
 
-
 const WelcomeScreen: React.FC<ScreenProps<'Welcome'>> = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const [fontsLoaded, fontsError] = useFonts({
     Poppins_500Medium,
-    Poppins_300Light
+    Poppins_300Light,
   });
 
   useEffect(() => {
@@ -37,20 +43,25 @@ const WelcomeScreen: React.FC<ScreenProps<'Welcome'>> = () => {
 
   return (
     <View style={styles.container}>
-
       <View style={styles.textGroup}>
         <TrezorIcon />
-        <Text style={styles.title}>
-          Trezor Wallet
-        </Text>
-        <Text style={styles.title2}>
-          Take control.
-        </Text>
+        <Text testID="heading" style={styles.title}>Trezor Wallet</Text>
+        <Text style={styles.title2}>Take control.</Text>
       </View>
 
       <View style={styles.btnGroup}>
-        <ActiveBtn theme='dark' color='green' title="Create a seed phrase wallet" onPress={goToGeneratePhrase} />
-        <ActiveBtn theme='dark' color='gray' title="I already have a wallet" onPress={goToImportPhrase} />
+        <ActiveBtn
+          theme="dark"
+          color="green"
+          title="Create a seed phrase wallet"
+          onPress={goToGeneratePhrase}
+        />
+        <ActiveBtn
+          theme="dark"
+          color="gray"
+          title="I already have a wallet"
+          onPress={goToImportPhrase}
+        />
       </View>
     </View>
   );
@@ -60,17 +71,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    paddingHorizontal:20,
+    paddingHorizontal: 20,
     paddingVertical: 60,
-    backgroundColor: '#F6F6F6'
+    backgroundColor: '#F6F6F6',
   },
-  textGroup:{
-    alignItems:'center',
-    justifyContent:'center',
-    marginBottom: 50
+  textGroup: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 50,
   },
-  btnGroup:{
-    gap:10
+  btnGroup: {
+    gap: 10,
   },
   title: {
     fontSize: 45,
