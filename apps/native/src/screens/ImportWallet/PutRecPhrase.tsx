@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { ScreenProps } from '../../navigation/index'; // Імпортуйте ScreenProps
+import { RootStackParamList, ScreenProps } from '../../navigation/index'; // Імпортуйте ScreenProps
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-const PutRecPhrase: React.FC<ScreenProps<'GetRecPhrase'>> = () => {
-  const navigation = useNavigation();
+const PutRecPhrase: React.FC<ScreenProps<'PutRecPhrase'>> = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const goToWelcome = () => {
     navigation.navigate('GeneratePhrase');
