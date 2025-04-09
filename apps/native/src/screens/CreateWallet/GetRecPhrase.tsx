@@ -1,14 +1,19 @@
+import {
+  Poppins_300Light,
+  Poppins_500Medium,
+  useFonts,
+} from '@expo-google-fonts/poppins';
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState, useRef } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ScreenProps } from '../../navigation/index';
-import ActiveBtn from '../../components/Btn';
-import { useFonts, Poppins_500Medium, Poppins_300Light } from '@expo-google-fonts/poppins';
-import * as SplashScreen from 'expo-splash-screen';
-import GoBackIcon from '../../../assets/icons/goBack-icon';
-import CopyIcon from '../../../assets/icons/copyBtn';
 import * as Clipboard from 'expo-clipboard';
-import CheckIcon from '../../../assets/icons/check-icon'
+import * as SplashScreen from 'expo-splash-screen';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import CheckIcon from '../../assets/icons/check-icon';
+import CopyIcon from '../../assets/icons/copyBtn';
+import GoBackIcon from '../../assets/icons/goBack-icon';
+import ActiveBtn from '../../components/Btn';
+import { RootStackParamList, ScreenProps } from '../../navigation/index';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,7 +31,8 @@ duck
 place`;
 
 const GetRecPhrase: React.FC<ScreenProps<'GetRecPhrase'>> = () => {
-  const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  
   const [isCopied, setIsCopied] = useState(false);
   const [fontsLoaded, fontsError] = useFonts({
     Poppins_500Medium,
@@ -52,7 +58,7 @@ const GetRecPhrase: React.FC<ScreenProps<'GetRecPhrase'>> = () => {
 
   const handleCopyToClipboard = async () => {
     await Clipboard.setStringAsync(recoveryPhraseText);
-    setIsCopied(true)
+    setIsCopied(true);
   };
 
   return (
@@ -65,7 +71,9 @@ const GetRecPhrase: React.FC<ScreenProps<'GetRecPhrase'>> = () => {
         <View style={styles.stepProgress}>
           <View style={[styles.step, { backgroundColor: '#116146' }]} />
           <View style={[styles.step, { backgroundColor: '#116146' }]} />
-          <View style={[styles.step, { backgroundColor: 'rgba(0, 0, 0, 0.1)' }]} />
+          <View
+            style={[styles.step, { backgroundColor: 'rgba(0, 0, 0, 0.1)' }]}
+          />
         </View>
         <TouchableOpacity style={{ opacity: 0 }}>
           <GoBackIcon />
@@ -76,8 +84,8 @@ const GetRecPhrase: React.FC<ScreenProps<'GetRecPhrase'>> = () => {
         <View style={styles.textGroup}>
           <Text style={styles.title}>Recovery Phrase</Text>
           <Text style={styles.title2}>
-            This is the only way you will be able to recover your account. Please store it
-            somewhere safe!
+            This is the only way you will be able to recover your account.
+            Please store it somewhere safe!
           </Text>
         </View>
 
@@ -86,26 +94,32 @@ const GetRecPhrase: React.FC<ScreenProps<'GetRecPhrase'>> = () => {
             {recoveryPhraseText.split('\n').join(' ')}
           </Text>
 
-          <TouchableOpacity onPress={handleCopyToClipboard} style={styles.copyBtn}>
-            {
-              isCopied? (
-                <>
-                  <CheckIcon />
-                  <Text style={styles.clipbaordText}>Copied Successfully</Text>
-                </>
-              ):(
-                <>
-                  <CopyIcon />
-                  <Text style={styles.clipbaordText}>Copy to clipboard</Text>
-                </>
-              )
-            }
-            
+          <TouchableOpacity
+            onPress={handleCopyToClipboard}
+            style={styles.copyBtn}
+          >
+            {isCopied ? (
+              <>
+                <CheckIcon />
+                <Text style={styles.clipbaordText}>Copied Successfully</Text>
+              </>
+            ) : (
+              <>
+                <CopyIcon />
+                <Text style={styles.clipbaordText}>Copy to clipboard</Text>
+              </>
+            )}
           </TouchableOpacity>
         </View>
       </View>
 
-      <ActiveBtn  opacity={isCopied?1:0.5} theme="dark" color="green" title="I saved it" onPress={isCopied?goToGenerate:null} />
+      <ActiveBtn
+        opacity={isCopied ? 1 : 0.5}
+        theme="dark"
+        color="green"
+        title="I saved it"
+        onPress={isCopied ? goToGenerate : undefined}
+      />
     </View>
   );
 };

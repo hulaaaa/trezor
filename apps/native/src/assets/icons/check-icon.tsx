@@ -3,7 +3,6 @@ import * as React from "react"
 import Svg, { SvgProps, Circle, Path } from "react-native-svg"
 const CheckIcon = (props: SvgProps) => (
   <Svg
-    xmlns="http://www.w3.org/2000/svg"
     width={19}
     height={19}
     fill="none"

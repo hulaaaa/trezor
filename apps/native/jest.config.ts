@@ -2,10 +2,13 @@ module.exports = {
   displayName: 'native',
   resolver: '@nx/jest/plugins/resolver',
   preset: 'jest-expo',
+  setupFiles: ['./jest.setup.ts'],
   moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   moduleNameMapper: {
     '\\.svg$': '@nx/expo/plugins/jest/svg-mock',
+    '^@expo-google-fonts/poppins$': '<rootDir>/__mocks__/@expo-google-fonts/poppins.js',
+
   },
   transform: {
     '.[jt]sx?$': [
